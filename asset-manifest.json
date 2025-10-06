@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/focal-classic-app/static/css/main.348f9c64.css",
-    "main.js": "/focal-classic-app/static/js/main.dbfd936d.js",
+    "main.js": "/focal-classic-app/static/js/main.2c656bc7.js",
     "index.html": "/focal-classic-app/index.html",
     "main.348f9c64.css.map": "/focal-classic-app/static/css/main.348f9c64.css.map",
-    "main.dbfd936d.js.map": "/focal-classic-app/static/js/main.dbfd936d.js.map"
+    "main.2c656bc7.js.map": "/focal-classic-app/static/js/main.2c656bc7.js.map"
   },
   "entrypoints": [
     "static/css/main.348f9c64.css",
-    "static/js/main.dbfd936d.js"
+    "static/js/main.2c656bc7.js"
   ]
 }
