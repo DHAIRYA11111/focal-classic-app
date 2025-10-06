@@ -673,7 +673,7 @@ const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
             limit(20)
         );
 
-        const unsubscribe = onSnapshot(q, async (snapshot) => {
+        const unsubscribe = onSnapshot(q, (snapshot) => {
             const chatList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setConversations(chatList);
             
@@ -852,7 +852,6 @@ export default function App() {
             if (docSnap.exists()) {
                 setProfile(docSnap.data());
             } else {
-                // If profile doesn't exist, create it (happens on first login)
                 setDoc(profileRef, { ...INITIAL_PROFILE, id: userId, lastActive: serverTimestamp() });
                 setProfile({ ...INITIAL_PROFILE, id: userId });
             }
