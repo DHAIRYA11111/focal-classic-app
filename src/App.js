@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-undef
 /* global __app_id, __firebase_config, __initial_auth_token */
 import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
 
 // We keep the Firebase imports here for future integration, but they are mocked below.
 import {
@@ -21,7 +20,13 @@ import {
     collection,
     query,
     where,
-    updateDoc
+    updateDoc,
+    addDoc,
+    Timestamp,
+    getDocs,
+    serverTimestamp,
+    orderBy, // Added for message sorting
+    limit, // Added for message limit
 } from 'firebase/firestore';
 
 // --- Icon Imports (Inline SVG for simplicity) ---
@@ -36,7 +41,7 @@ const Search = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" wid
 const Fire = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5a2.5 2.5 0 0 0 0-5C6.5 7 5 3.5 5 3.5c.378 1.5 1.5 3 2.5 4.5 1.5 2.5 4 2.5 4 2.5v12c0 .5.25 1 .5 1s.5-.5.5-1v-2"/><path d="M16 17c0 1.5-2.5 3-5 3s-5-1.5-5-3c0-.5.25-1 .5-1s.5.5.5 1"/></svg>;
 const Check = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>;
 const Edit = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>;
-
+const Send = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M15 9l-6 6"/></svg>;
 
 // --- Constants ---
 const TABS = {
@@ -44,10 +49,11 @@ const TABS = {
     CONNECT: 'connect',
     LEADERBOARD: 'leaderboard',
     MESSAGES: 'messages',
-    SETTINGS: 'settings', // New Settings Tab
+    SETTINGS: 'settings',
 };
 
 const INITIAL_PROFILE = {
+    id: 'local_user_id',
     name: "Campus User",
     major: "Computer Science",
     year: "4th Year",
@@ -59,43 +65,71 @@ const INITIAL_PROFILE = {
         projects: 30,
     },
     isDatingEnabled: false,
-    profileViews: 124, // New Metric
-    likesCount: 35, // New Metric
-    profileImage: "https://placehold.co/800x450/171717/d4d4d4?text=USER+PROFILE", // Placeholder for profile image
+    profileViews: 124,
+    likesCount: 35,
+    profileImage: "https://placehold.co/800x450/171717/d4d4d4?text=USER+PROFILE",
 };
 
 // Mock data for profiles (Sorted by score descending for leaderboard)
 const mockProfiles = [
-    { id: 4, name: "Ben Carter", score: 250, major: "Aerospace Eng.", year: "4th Year", likes: ["Chess", "3D Printing"], dislikes: ["Networking events"], location: "Tech Lab" },
-    { id: 2, name: "Alex Chen", score: 210, major: "Business Analyst", year: "4th Year", likes: ["Basketball", "Startups", "Data Science"], dislikes: ["Long meetings", "Waiting in line"], location: "Off-Campus Apartment" },
-    { id: 6, name: "David Kim", score: 195, major: "Data Science", year: "Grad Student", likes: ["Big data", "Podcasts"], dislikes: ["Slow internet"], location: "Library Annex" },
-    { id: 1, name: "Jane Doe", score: 185, major: "Electrical Eng.", year: "3rd Year", likes: ["Sci-Fi", "Hiking", "Vintage Film"], dislikes: ["Waking up early", "Crowds"], location: "North Wing Dorms" },
-    { id: 3, name: "Maria S.", score: 140, major: "Architecture", year: "2nd Year", likes: ["Drawing", "Coffee", "Modernist Design"], dislikes: ["Loud Music", "Big parties"], location: "Central Residence" },
-    { id: 5, name: "Lisa Wong", score: 120, major: "Visual Arts", year: "3rd Year", likes: ["Painting", "Museums"], dislikes: ["Loud parties"], location: "Art Studio" },
+    { id: 'user4', name: "Ben Carter", score: 250, major: "Aerospace Eng.", year: "4th Year", likes: ["Chess", "3D Printing"], dislikes: ["Networking events"], location: "Tech Lab", profileImage: "https://placehold.co/100x100/171717/d4d4d4?text=BC" },
+    { id: 'user2', name: "Alex Chen", score: 210, major: "Business Analyst", year: "4th Year", likes: ["Basketball", "Startups", "Data Science"], dislikes: ["Long meetings", "Waiting in line"], location: "Off-Campus Apartment", profileImage: "https://placehold.co/100x100/171717/d4d4d4?text=AC" },
+    { id: 'user6', name: "David Kim", score: 195, major: "Data Science", year: "Grad Student", likes: ["Big data", "Podcasts"], dislikes: ["Slow internet"], location: "Library Annex", profileImage: "https://placehold.co/100x100/171717/d4d4d4?text=DK" },
+    { id: 'user1', name: "Jane Doe", score: 185, major: "Electrical Eng.", year: "3rd Year", likes: ["Sci-Fi", "Hiking", "Vintage Film"], dislikes: ["Waking up early", "Crowds"], location: "North Wing Dorms", profileImage: "https://placehold.co/100x100/171717/d4d4d4?text=JD" },
 ];
 
+// Mock message data structure (used only if Firebase fails)
+const MOCK_CONVERSATIONS = [
+    { id: 'chat1', recipientId: 'user2', name: 'Alex Chen', lastMessage: 'See you at the hackathon!', timestamp: new Date(Date.now() - 3600000) },
+    { id: 'chat2', recipientId: 'user4', name: 'Ben Carter', lastMessage: 'Did you solve the chess puzzle?', timestamp: new Date(Date.now() - 120000) },
+];
+const MOCK_MESSAGES_DATA = {
+    'chat1': [
+        { senderId: 'user2', text: 'Hey, I saw your post about the new data course!', timestamp: new Date(Date.now() - 3600000) },
+        { senderId: 'local_user_id', text: 'Oh, awesome! Are you thinking of taking it?', timestamp: new Date(Date.now() - 3500000) },
+        { senderId: 'user2', text: 'Definitely. See you at the hackathon!', timestamp: new Date(Date.now() - 3400000) },
+    ],
+    'chat2': [
+        { senderId: 'user4', text: 'Did you solve the chess puzzle?', timestamp: new Date(Date.now() - 120000) },
+    ]
+};
 
-// --- Firebase Initialization and Auth/DB Handlers (MOCKED) ---
-let db = null;
-let auth = null;
-let appId = 'focal-app-local';
+// --- GLOBAL FIREBASE INSTANCES ---
+let db_instance = null;
+let auth_instance = null;
+let app_id_global = 'focal-app-local';
 
 const initFirebase = () => {
-    // THIS FUNCTION IS NOW A NO-OP (NO OPERATION) FOR LOCAL DEV
-    console.log("Firebase init skipped for local development.");
+    // This is the CONDITIONAL INIT LOGIC FOR LIVE/DEV
+    try {
+        const global_app_id = typeof __app_id !== 'undefined' ? __app_id : null;
+        const global_firebase_config = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
+
+        if (global_app_id && global_firebase_config) {
+            const firebaseConfig = JSON.parse(global_firebase_config);
+            const app = initializeApp(firebaseConfig);
+            db_instance = getFirestore(app);
+            auth_instance = getAuth(app);
+            app_id_global = global_app_id;
+            console.log("Firebase initialized successfully for Canvas/Live.");
+        } else {
+            throw new Error("Missing Canvas Globals - Entering DEV MODE.");
+        }
+    } catch (e) {
+        console.warn("Firebase init skipped. Running in mock/DEV MODE.");
+    }
 }
 
-// --- Utility: Clipboard Copy ---
+
+// --- Utility: Clipboard Copy (Robust for iframe environments) ---
 const copyToClipboard = (text) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => {
-            console.log("Copied to clipboard via modern API!");
-        });
+        navigator.clipboard.writeText(text);
     }
 };
 
 
-// --- Gemini API Call Functions ---
+// --- Gemini API Call Functions (Simplified) ---
 const exponentialBackoffFetch = async (url, options, maxRetries = 5) => {
     const apiKey = "";
     const finalUrl = `${url}?key=${apiKey}`;
@@ -533,8 +567,135 @@ const LeaderboardView = ({ isDevMode }) => {
     );
 };
 
+// --- Component: Chat Window ---
+const ChatWindow = ({ conversation, userId }) => {
+    const [messages, setMessages] = useState(MOCK_MESSAGES_DATA[conversation.id] || []);
+    const [newMessage, setNewMessage] = useState('');
+    const messagesEndRef = React.useRef(null);
 
-// --- Component: Settings View (New) ---
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        // Mock Real-time Update (simulates onSnapshot)
+        scrollToBottom();
+    }, [messages]);
+
+    const handleSend = (e) => {
+        e.preventDefault();
+        if (!newMessage.trim()) return;
+
+        const messageToSend = {
+            senderId: userId,
+            text: newMessage.trim(),
+            timestamp: new Date(),
+        };
+
+        // Mock saving message (in a real app, this would be addDoc(collectionRef, messageToSend))
+        setMessages(prev => [...prev, messageToSend]);
+        setNewMessage('');
+
+        // Simulate opponent reply shortly after
+        setTimeout(() => {
+            const reply = {
+                senderId: conversation.userId,
+                text: "Got it! That's a good point.",
+                timestamp: new Date(Date.now() + 500),
+            };
+            setMessages(prev => [...prev, reply]);
+        }, 1500);
+    };
+
+    const formatTime = (date) => {
+        if (!date) return '';
+        const d = date instanceof Date ? date : date; // Already a Date object in mock
+        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
+
+    return (
+        <div className="chat-window-container">
+            <div className="chat-header-bar">
+                <div className="chat-avatar-small">
+                    <User className="icon-small" />
+                </div>
+                <h3 className="chat-name">{conversation.name}</h3>
+                <span className="chat-status">Active</span>
+            </div>
+
+            <div className="message-list">
+                {messages.map((msg, index) => (
+                    <div key={index} className={`message-row ${msg.senderId === userId ? 'mine' : 'theirs'}`}>
+                        <div className="message-bubble">
+                            <p className="message-text">{msg.text}</p>
+                            <span className="message-time">{formatTime(msg.timestamp)}</span>
+                        </div>
+                    </div>
+                ))}
+                <div ref={messagesEndRef} />
+            </div>
+
+            <form className="message-input-area" onSubmit={handleSend}>
+                <input
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Send a message..."
+                    className="message-input-field"
+                />
+                <button type="submit" className="message-send-button" disabled={!newMessage.trim()}>
+                    <Send className="icon-small" />
+                </button>
+            </form>
+        </div>
+    );
+};
+
+// --- Component: Messages View (New) ---
+const MessagesView = ({ userId }) => {
+    const [conversations] = useState(MOCK_CONVERSATIONS);
+    const [selectedChat, setSelectedChat] = useState(MOCK_CONVERSATIONS[0]);
+
+    const ConversationItem = ({ chat }) => (
+        <div
+            className={`conversation-item ${selectedChat?.id === chat.id ? 'active' : ''}`}
+            onClick={() => setSelectedChat(chat)}
+        >
+            <div className="chat-avatar-small">
+                <User className="icon-small" />
+            </div>
+            <div className="chat-info">
+                <span className="chat-contact-name">{chat.name}</span>
+                <p className="chat-last-message">{chat.lastMessage}</p>
+            </div>
+            <span className="chat-last-time">{chat.timestamp.toLocaleDateString([], { month: 'short', day: 'numeric' })}</span>
+        </div>
+    );
+
+    return (
+        <div className="view-container messages-view-grid">
+            <div className="chat-list-panel">
+                <h2 className="panel-header">Chats</h2>
+                {conversations.map(chat => (
+                    <ConversationItem key={chat.id} chat={chat} />
+                ))}
+            </div>
+
+            <div className="chat-window-panel">
+                {selectedChat ? (
+                    <ChatWindow conversation={selectedChat} userId={userId} />
+                ) : (
+                    <div className="chat-placeholder">
+                        Select a conversation to begin chatting.
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+
+// --- Component: Settings View ---
 const SettingsView = ({ profile, setProfile, saveProfileData }) => {
     const [isEditingMerit, setIsEditingMerit] = useState(false);
     const toggleDating = () => setProfile(prev => ({ ...prev, isDatingEnabled: !prev.isDatingEnabled }));
@@ -596,35 +757,19 @@ const SettingsView = ({ profile, setProfile, saveProfileData }) => {
 };
 
 
-// --- Component: Messages View (Placeholder) ---
-const MessagesView = ({ isDevMode }) => (
-    <div className="view-container messages-view">
-        <h1 className="view-title">Messages</h1>
-        <div className="card placeholder-card">
-            <p className="placeholder-text">Real-time messaging is coming soon!</p>
-            <p className="placeholder-subtext">Chat with your connections and matches here.</p>
-        </div>
-    </div>
-);
-
-
 // --- Main App Component ---
 export default function App() {
     const [currentTab, setCurrentTab] = useState(TABS.PROFILE);
     const [profile, setProfile] = useState(INITIAL_PROFILE);
-    const [isAuthReady, setIsAuthReady] = useState(true); // INSTANT LOAD FIX
-    const [userId, setUserId] = useState(crypto.randomUUID());
-    const [authState, setAuthState] = useState({
-        // Force fully loaded state immediately
+    const [userId] = useState('local_user_id'); // Set local_user_id for mock senderId comparison
+    const [authState] = useState({
         isInitializing: false,
         error: "DEV MODE: Firebase is inactive. Data is NOT saved.",
     });
     const isDevMode = true;
 
-
     // --- Initialization (Now instant and mocked) ---
     useEffect(() => {
-        // This runs instantly, forcing the app to render the UI immediately.
         initFirebase();
     }, []);
 
@@ -665,7 +810,7 @@ export default function App() {
             case TABS.LEADERBOARD:
                 return <LeaderboardView isDevMode={isDevMode} />;
             case TABS.MESSAGES:
-                return <MessagesView isDevMode={isDevMode} />;
+                return <MessagesView userId={userId} />;
             case TABS.SETTINGS:
                 return <SettingsView profile={profile} setProfile={setProfile} saveProfileData={saveProfileData} />;
             default:
@@ -674,15 +819,475 @@ export default function App() {
     };
 
 
-    // This conditional render block is removed to prevent the stuck loading screen
-    /*
-    if (authState.isInitializing) {
-        return <div className="loading-screen">FOCAL Loading...</div>;
-    }
-    */
-
     return (
-        <div className={`app-container desktop-grid ${profile.isDatingEnabled ? 'dating-theme' : 'prof-theme'}`}>
+        <div className="app-container desktop-grid">
+            
+            <style jsx="true">{`
+                /* --- Variables and Global Reset (INLINED CSS) --- */
+                :root {
+                    --color-black: #000000;
+                    --color-gray-950: #0a0a0a;
+                    --color-gray-900: #171717;
+                    --color-gray-800: #262626;
+                    --color-gray-700: #3f3f46;
+                    --color-gray-500: #737373;
+                    --color-gray-300: #d4d4d4;
+                    --color-white: #ffffff;
+                    
+                    --color-rose: #e11d48; 
+                    
+                    --accent-color: ${getAccentColor()};
+                    
+                    --transition-speed: 300ms;
+                    --sidebar-width: 250px;
+                }
+
+                * {
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Inter', sans-serif;
+                    transition: background-color var(--transition-speed), border-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+                }
+
+                body {
+                    background-color: var(--color-gray-950);
+                }
+
+                /* --- App Layout (PC/Desktop Grid) --- */
+                .app-container {
+                    color: var(--color-white);
+                }
+                .app-container.desktop-grid {
+                    display: grid;
+                    grid-template-columns: var(--sidebar-width) 1fr;
+                    min-height: 100vh;
+                    width: 100%;
+                    max-width: none;
+                    margin: 0;
+                    border: none;
+                    background-color: var(--color-gray-950); /* Main app background */
+                }
+
+                .sidebar {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    width: var(--sidebar-width);
+                    background-color: var(--color-gray-900);
+                    border-right: 1px solid var(--color-gray-800);
+                    padding: 24px 0;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+
+                .logo {
+                    font-size: 1.8rem;
+                    font-weight: 900;
+                    text-align: center;
+                    margin-bottom: 32px;
+                    letter-spacing: 2px;
+                    color: var(--accent-color);
+                }
+
+                .sidebar-group {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .sidebar-button {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    text-align: left;
+                    padding: 12px 24px;
+                    background: none;
+                    border: none;
+                    border-right: 4px solid transparent; /* Used for active indicator */
+                    cursor: pointer;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    gap: 12px;
+                    color: var(--color-gray-400);
+                }
+
+                .sidebar-button:hover:not(.active) {
+                    background-color: var(--color-gray-800);
+                    color: var(--color-white);
+                }
+
+                .sidebar-button.active {
+                    background-color: var(--color-gray-800);
+                    font-weight: 700;
+                    color: var(--accent-color);
+                    border-right-color: var(--accent-color);
+                }
+
+                .sidebar-footer {
+                    padding-top: 20px;
+                    border-top: 1px solid var(--color-gray-800);
+                }
+
+                /* --- Main Content Panel --- */
+                .main-content-panel {
+                    grid-column: 2 / 3;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: var(--color-gray-950);
+                }
+
+                .content-area {
+                    flex-grow: 1;
+                    overflow-y: auto;
+                    padding: 0 40px 40px 40px; 
+                }
+
+                .view-container {
+                    padding-top: 24px;
+                    max-width: 1000px; 
+                    margin: 0 auto;
+                }
+
+                .card {
+                    background-color: var(--color-gray-900);
+                    padding: 20px;
+                    border-radius: 12px;
+                    margin-bottom: 20px;
+                    border: 1px solid var(--color-gray-800);
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+                }
+
+                .card-title {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    color: var(--color-white);
+                    margin-bottom: 12px;
+                }
+
+                .button-primary { 
+                    background-color: var(--accent-color);
+                    color: var(--color-black);
+                    padding: 10px 20px;
+                    border: 1px solid var(--accent-color);
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .button-primary:hover:not(:disabled) {
+                    background-color: transparent;
+                    color: var(--accent-color);
+                }
+
+                .button-secondary {
+                    background-color: var(--color-gray-800);
+                    color: var(--color-white);
+                    padding: 10px 20px;
+                    border: 1px solid var(--color-gray-800);
+                    border-radius: 8px;
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+
+                .button-secondary:hover:not(:disabled) {
+                    background-color: var(--color-gray-700);
+                    border-color: var(--color-gray-700);
+                }
+
+                button:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+
+                .icon-small { width: 16px; height: 16px; }
+                .icon-medium { width: 24px; height: 24px; }
+                .icon-large { width: 48px; height: 48px; }
+
+                .dev-mode-banner {
+                    background-color: var(--color-gray-800);
+                    color: var(--color-gray-300);
+                    font-size: 0.8rem;
+                    padding: 8px 24px;
+                    text-align: center;
+                    border-bottom: 1px solid var(--color-gray-700);
+                    position: sticky;
+                    top: 0;
+                    z-index: 10;
+                }
+
+                /* --- Profile View Specifics (Two-Column Layout) --- */
+                .profile-view {
+                    display: grid;
+                    grid-template-columns: 1.5fr 1fr; 
+                    gap: 40px;
+                }
+
+                .profile-card-section {
+                    grid-column: 1 / 2;
+                }
+
+                .profile-merit-section {
+                    grid-column: 2 / 3;
+                }
+
+                .profile-card-image {
+                    height: 300px; 
+                    border-radius: 12px;
+                    background-color: var(--color-gray-800);
+                    background-size: cover;
+                    background-position: center;
+                    border: 1px solid var(--color-gray-800);
+                    position: relative;
+                    overflow: hidden;
+                    margin-bottom: 20px;
+                }
+
+                .profile-card-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    padding: 16px;
+                    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+                    color: var(--color-white);
+                }
+
+                .profile-name {
+                    font-size: 2rem;
+                    font-weight: 900;
+                    line-height: 1.1;
+                    color: var(--color-white);
+                }
+
+                .profile-detail {
+                    font-size: 1rem;
+                    color: var(--color-gray-300);
+                    margin-top: 4px;
+                    margin-bottom: 8px;
+                }
+
+                .profile-metrics {
+                    display: flex;
+                    gap: 16px;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: var(--color-gray-300);
+                }
+
+                .metric-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                }
+
+                .metric-fire { color: var(--color-rose); }
+                .metric-heart { color: var(--color-rose); }
+
+                .profile-bio-details {
+                    padding: 16px 20px;
+                }
+
+                .profile-bio-text {
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    color: var(--color-gray-300);
+                }
+
+                .score-card { border-left: 3px solid var(--accent-color); margin-bottom: 24px; }
+                .score-value { font-size: 3.5rem; font-weight: 800; }
+                .merit-details { margin-top: 10px; border-top: 1px dashed var(--color-gray-800); padding-top: 10px; display: grid; gap: 8px; }
+                .merit-item { display: flex; justify-content: space-between; font-size: 0.875rem; }
+                .merit-label { color: var(--color-gray-400); }
+                .merit-points { color: var(--color-gray-300); font-weight: 600; font-family: monospace; }
+                .narrative-card { border-left: 3px solid var(--color-gray-500); }
+                .narrative-text { font-size: 0.95rem; line-height: 1.5; color: var(--color-gray-300); }
+                .narrative-actions { display: flex; gap: 12px; margin-top: 16px; }
+                .redemption-card { border-left: 3px solid var(--color-gray-700); }
+                .redemption-text { font-size: 0.9rem; color: var(--color-gray-400); }
+                .merit-bonus { color: var(--color-white); font-weight: 700; }
+                .connect-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+                .connect-toggle-container { display: flex; align-items: center; gap: 10px; }
+                .connect-toggle-label { font-size: 0.9rem; color: var(--color-gray-400); }
+                .search-bar-container { display: flex; align-items: center; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); border-radius: 8px; padding: 10px 16px; margin-bottom: 24px; }
+                .icon-search { width: 20px; height: 20px; color: var(--color-gray-500); margin-right: 12px; }
+                .search-input { flex-grow: 1; background: none; border: none; color: var(--color-white); font-size: 1rem; outline: none; }
+                .connect-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+                .user-profile-card { padding: 16px; }
+                .profile-summary { display: flex; align-items: center; border-bottom: 1px solid var(--color-gray-800); padding-bottom: 12px; margin-bottom: 12px; }
+                .profile-summary .icon-medium { color: var(--accent-color); margin-right: 12px; }
+                .profile-text { flex-grow: 1; }
+                .user-name { font-size: 1.125rem; font-weight: 700; color: var(--color-white); }
+                .user-score { font-size: 0.75rem; font-weight: 500; color: var(--color-gray-500); margin-left: 8px; }
+                .user-major { font-size: 0.875rem; color: var(--color-gray-400); }
+                .like-button { background-color: var(--color-gray-800); border: none; color: var(--color-rose); padding: 8px; border-radius: 50%; cursor: pointer; }
+                .like-button:hover { background-color: var(--color-rose); color: var(--color-white); }
+                .profile-details-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
+                .detail-label { font-weight: 600; color: var(--color-gray-300); display: block; margin-bottom: 4px; }
+                .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+                .tag { background-color: var(--color-gray-800); color: var(--color-white); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; }
+                .tag-dislike { background-color: var(--color-gray-950); color: var(--color-gray-500); border: 1px solid var(--color-gray-800); }
+                .icebreaker-section { border-top: 1px solid var(--color-gray-800); padding-top: 12px; }
+                .icebreaker-label { font-size: 0.75rem; color: var(--color-gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+                .icebreaker-box { display: flex; align-items: center; background-color: var(--color-gray-800); padding: 8px; border-radius: 8px; }
+                .icebreaker-text { flex-grow: 1; font-size: 0.9rem; padding-right: 8px; }
+                .placeholder-text { color: var(--color-gray-500); font-style: italic; }
+                .generated-text { color: var(--color-gray-300); font-weight: 500; }
+                .generate-button { background-color: var(--color-gray-950); color: var(--accent-color); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-gray-800); font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; cursor: pointer; }
+                .copy-button { background: none; border: none; color: var(--color-gray-500); padding: 4px; cursor: pointer; }
+                .leaderboard-grid { display: grid; grid-template-columns: 50px 3fr 1fr; border: 1px solid var(--color-gray-800); border-radius: 12px; overflow: hidden; }
+                .leaderboard-header { background-color: var(--color-gray-700); padding: 12px 16px; font-weight: 700; color: var(--color-white); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--color-gray-800); }
+                .leaderboard-header span { display: flex; align-items: center; padding-left: 10px; }
+                .leaderboard-rank-header { justify-content: center; }
+                .leaderboard-score-header { justify-content: flex-end; }
+                .leaderboard-row:nth-child(odd) > span { background-color: var(--color-gray-900); }
+                .leaderboard-row:nth-child(even) > span { background-color: var(--color-gray-950); }
+                .leaderboard-row:hover > span { background-color: var(--color-gray-800); }
+                .leaderboard-row span { padding: 12px 16px; border-top: 1px solid var(--color-gray-800); font-size: 0.95rem; display: flex; align-items: center; }
+                .leaderboard-rank { font-weight: 700; color: var(--accent-color); justify-content: center; }
+                .top-rank .leaderboard-rank { font-size: 1.1rem; background-color: var(--color-gray-700) !important; color: var(--color-white); }
+                .leaderboard-name-major { flex-direction: column; align-items: flex-start; }
+                .leaderboard-name { font-weight: 600; color: var(--color-white); }
+                .leaderboard-major { font-size: 0.8rem; color: var(--color-gray-500); margin-top: 2px; }
+                .leaderboard-score { font-weight: 700; color: var(--color-gray-300); justify-content: flex-end; font-family: monospace; }
+                .settings-view { padding-top: 24px; max-width: 700px; }
+                .settings-section-title { font-size: 1.3rem; font-weight: 700; color: var(--accent-color); margin-top: 24px; margin-bottom: 16px; }
+                .input-field { width: 100%; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); padding: 8px 12px; color: var(--color-white); border-radius: 6px; font-size: 1rem; outline: none; }
+                .input-field-small { width: 80px; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); padding: 6px 10px; color: var(--color-white); border-radius: 6px; font-size: 0.9rem; text-align: right; outline: none; }
+                
+                /* --- MESSAGING CSS (FINAL STYLED) --- */
+                .messages-view-grid {
+                    display: grid;
+                    grid-template-columns: 280px 1fr;
+                    min-height: calc(100vh - 70px);
+                    max-width: none;
+                    padding: 0;
+                    gap: 1px;
+                    background-color: var(--color-gray-800);
+                    border-radius: 12px;
+                    overflow: hidden;
+                    border: 1px solid var(--color-gray-800);
+                }
+
+                .chat-list-panel {
+                    grid-column: 1 / 2;
+                    background-color: var(--color-gray-900);
+                    padding: 16px 0;
+                    overflow-y: auto;
+                }
+                
+                .chat-window-panel {
+                    grid-column: 2 / 3;
+                    background-color: var(--color-gray-950);
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .chat-window-container {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                }
+                
+                /* Conversation Item */
+                .conversation-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 16px;
+                    cursor: pointer;
+                    border-left: 3px solid transparent;
+                }
+                
+                .conversation-item:hover { background-color: var(--color-gray-800); }
+                
+                .conversation-item.active {
+                    background-color: var(--color-gray-800);
+                    border-left-color: var(--accent-color);
+                }
+                
+                .chat-contact-name { font-weight: 600; font-size: 0.95rem; color: var(--color-white); display: block; }
+                .chat-last-message { font-size: 0.8rem; color: var(--color-gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+                .chat-last-time { font-size: 0.7rem; color: var(--color-gray-500); }
+
+                /* Chat Window Header */
+                .chat-header-bar {
+                    display: flex; align-items: center;
+                    padding: 16px;
+                    border-bottom: 1px solid var(--color-gray-800);
+                    background-color: var(--color-gray-900);
+                }
+                
+                .chat-name { font-size: 1.1rem; font-weight: 700; margin-right: 10px; }
+                .chat-status { font-size: 0.75rem; color: var(--color-rose); border: 1px solid var(--color-rose); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+
+                /* Message List */
+                .message-list {
+                    flex-grow: 1; overflow-y: auto;
+                    padding: 20px;
+                    display: flex; flex-direction: column; gap: 12px;
+                }
+                
+                .message-row { display: flex; width: 100%; }
+                .message-row.mine { justify-content: flex-end; }
+                
+                .message-bubble {
+                    max-width: 70%;
+                    padding: 10px 14px;
+                    border-radius: 18px;
+                    font-size: 0.95rem; line-height: 1.4;
+                    position: relative;
+                }
+                
+                .message-row.mine .message-bubble {
+                    background-color: var(--accent-color);
+                    color: var(--color-black); /* High contrast text on accent color */
+                    border-bottom-right-radius: 4px;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+                }
+                
+                .message-row.theirs .message-bubble {
+                    background-color: var(--color-gray-700);
+                    color: var(--color-white); /* High contrast text on dark gray */
+                    border-bottom-left-radius: 4px;
+                }
+
+                .message-text { margin-bottom: 4px; }
+
+                .message-time {
+                    display: block; font-size: 0.65rem; text-align: right;
+                    color: rgba(0, 0, 0, 0.6); /* Darkened for contrast on accent bubble */
+                }
+
+                .message-row.theirs .message-time {
+                    color: var(--color-gray-400); /* Lighter for contrast on dark bubble */
+                }
+
+                /* Message Input */
+                .message-input-area {
+                    padding: 15px 20px; border-top: 1px solid var(--color-gray-800);
+                    display: flex; gap: 10px;
+                    background-color: var(--color-gray-900);
+                }
+                
+                .message-input-field {
+                    flex-grow: 1; padding: 10px 15px;
+                    background-color: var(--color-gray-800);
+                    border: 1px solid var(--color-gray-700);
+                    border-radius: 20px;
+                    color: var(--color-white); font-size: 1rem; outline: none;
+                }
+                
+                .message-send-button {
+                    background-color: var(--accent-color);
+                    color: var(--color-black); border: none;
+                    border-radius: 50%; width: 40px; height: 40px;
+                    display: flex; justify-content: center; align-items: center; cursor: pointer;
+                }
+            `}</style>
             
             {/* --- Left Navigation Sidebar --- */}
             <nav className="sidebar">
@@ -700,7 +1305,7 @@ export default function App() {
 
             {/* --- Main Content Panel --- */}
             <main className="main-content-panel">
-                {isDevMode && (
+                {authState.error && (
                     <div className="dev-mode-banner">
                         <p>{authState.error}</p>
                     </div>
@@ -712,3 +1317,4 @@ export default function App() {
         </div>
     );
 }
+
