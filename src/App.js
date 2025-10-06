@@ -33,7 +33,7 @@ const Connect = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" wi
 const Mail = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>;
 const Heart = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>;
 const Sparkle = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12h2"/><path d="M12 20v2"/><path d="M12 2h0.01"/><path d="m20 20-1.4-1.4"/><path d="m4 4 1.4 1.4"/><path d="M21 15.5H16.5L15 21l-3.5-3.5L8 21l-1.5-5.5H2l3.5-3.5L2 8l5.5-1.5L8 2l3.5 3.5L15 2l1.5 5.5H21l-3.5 3.5L21 15.5z"/></svg>;
-const Settings = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+const Settings = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
 const Trophy = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M12 15V9"/><path d="M12 20a6 6 0 0 0-6-6v-3a6 6 0 1 0 12 0v3a6 6 0 0 0-6 6z"/></svg>;
 const Search = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
 const Fire = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5a2.5 2.5 0 0 0 0-5C6.5 7 5 3.5 5 3.5c.378 1.5 1.5 3 2.5 4.5 1.5 2.5 4 2.5 4 2.5v12c0 .5.25 1 .5 1s.5-.5.5-1v-2"/><path d="M16 17c0 1.5-2.5 3-5 3s-5-1.5-5-3c0-.5.25-1 .5-1s.5.5.5 1"/></svg>;
@@ -53,7 +53,7 @@ const TABS = {
 };
 
 const INITIAL_PROFILE = {
-    id: '', // Will be set to Firebase UID or local_user_id
+    id: '',
     name: "Campus User",
     major: "Computer Science",
     year: "4th Year",
@@ -71,44 +71,51 @@ const INITIAL_PROFILE = {
     lastActive: serverTimestamp(),
 };
 
-// MOCK data used only if Firebase fails
+// --- LIVE FIREBASE CONFIGURATION (Using User's Provided Keys) ---
+// Note: This object contains the actual keys needed for deployment.
+const LIVE_FIREBASE_CONFIG = {
+    apiKey: "AIzaSyAcr22sc3lgDlgdkZSI06PD_3D7JYVPy8w",
+    authDomain: "focal-campus-app.firebaseapp.com",
+    projectId: "focal-campus-app",
+    storageBucket: "focal-campus-app.firebasestorage.app",
+    messagingSenderId: "197907061415",
+    appId: "1:197907061415:web:00571158ff191402e71982"
+};
+
+
+// Mock data used only if Firebase fails (for development fallback)
 const MOCK_PROFILES_DATA = [
     { id: 'user4', name: "Ben Carter", score: 250, major: "Aerospace Eng.", year: "4th Year", likes: ["Chess"], dislikes: ["Networking events"], location: "Tech Lab", profileImage: "https://placehold.co/100x100/171717/d4d4d4?text=BC" },
     { id: 'user2', name: "Alex Chen", score: 210, major: "Business Analyst", year: "4th Year", likes: ["Basketball"], dislikes: ["Long meetings"], location: "Off-Campus Apartment", profileImage: "https://placehold.co/100x100/171717/d4d4d4?text=AC" },
 ];
-
+const MOCK_CONVERSATIONS = [
+    { id: 'chat1', recipientId: 'user2', name: 'Alex Chen', lastMessage: 'See you at the hackathon!', timestamp: new Date(Date.now() - 3600000) },
+];
 const MOCK_MESSAGES_DATA = {
-    'chat-user2': [
+    'chat1': [
         { senderId: 'user2', text: 'Hey, I saw your post about the new data course!', timestamp: new Date(Date.now() - 3600000) },
     ],
 };
-const MOCK_CONVERSATIONS = [
-    { id: 'chat-user2', recipientId: 'user2', name: 'Alex Chen', lastMessage: 'See you at the hackathon!', timestamp: new Date(Date.now() - 3600000) },
-];
 
 
 // --- GLOBAL FIREBASE INSTANCES ---
 let db_instance = null;
 let auth_instance = null;
-let app_id_global = 'focal-app-local';
+let app_id_global = LIVE_FIREBASE_CONFIG.projectId;
 
 const initFirebase = () => {
+    // This function now uses the LIVE_FIREBASE_CONFIG object directly for connection.
     try {
-        const global_app_id = typeof __app_id !== 'undefined' ? __app_id : null;
-        const global_firebase_config = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
-
-        if (global_app_id && global_firebase_config) {
-            const firebaseConfig = JSON.parse(global_firebase_config);
-            const app = initializeApp(firebaseConfig);
-            db_instance = getFirestore(app);
-            auth_instance = getAuth(app);
-            app_id_global = global_app_id;
-            console.log("Firebase initialized successfully for Canvas/Live.");
-        } else {
-            throw new Error("Missing Canvas Globals - Entering DEV MODE.");
-        }
+        const app = initializeApp(LIVE_FIREBASE_CONFIG);
+        db_instance = getFirestore(app);
+        auth_instance = getAuth(app);
+        console.log("Firebase initialized successfully for Live Environment.");
     } catch (e) {
-        console.warn("Firebase init skipped. Running in mock/DEV MODE.");
+        // Fallback for local dev when connection keys are rejected
+        console.error("Critical Firebase Connection Error:", e);
+        console.warn("Falling back to mock/DEV MODE.");
+        db_instance = null;
+        auth_instance = null;
     }
 }
 
@@ -128,11 +135,9 @@ const copyToClipboard = (text) => {
 };
 
 
-// --- Gemini API Call Functions (Skipped for brevity) ---
+// --- Gemini API Call Functions (Mocked for stability) ---
 const exponentialBackoffFetch = async (url, options, maxRetries = 5) => {
-    const apiKey = "";
-    const finalUrl = `${url}?key=${apiKey}`;
-    return {}; // Mocking return for final code
+    return {};
 };
 
 const callGeminiAPI = async (systemPrompt, userQuery) => {
@@ -415,7 +420,6 @@ const ConnectView = ({ profile, setProfile, isDevMode, allUsers, setTargetChatId
                             user={user}
                             datingMessage={datingMessage[user.id] || "Tap 'Generate' to craft a perfect opener."}
                             generateIcebreaker={generateIcebreaker}
-                            isGenerating={isGenerating}
                             onChatClick={handleChatClick}
                         />
                     ))
@@ -525,7 +529,6 @@ const LeaderboardView = ({ isDevMode, allUsers }) => {
 // --- Component: Chat Window ---
 const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
     const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = React.useRef(null);
 
     const scrollToBottom = () => {
@@ -549,10 +552,9 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
             const msgs = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data(),
-                timestamp: doc.data().timestamp?.toDate(), // Convert Firestore Timestamp to Date
+                timestamp: doc.data().timestamp?.toDate(),
             }));
             setMessages(msgs);
-            // Scroll must happen after state update renders
             setTimeout(scrollToBottom, 0);
         });
 
@@ -563,36 +565,33 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
     // 2. MESSAGE SEND HANDLER
     const handleSend = async (e) => {
         e.preventDefault();
+        if (isDevMode) return;
         if (!newMessage.trim()) return;
 
         const messageData = {
             senderId: currentUserId,
             text: newMessage.trim(),
-            timestamp: serverTimestamp(), // Use server timestamp for reliable ordering
+            timestamp: serverTimestamp(),
         };
-
-        if (isDevMode) {
-            // Mock send logic for DEV MODE
-            MOCK_MESSAGES_DATA[targetChatId] = [...(MOCK_MESSAGES_DATA[targetChatId] || []), { ...messageData, timestamp: new Date() }];
-            setMessages(MOCK_MESSAGES_DATA[targetChatId]);
-            setNewMessage('');
-            return;
-        }
 
         try {
             const messagesRef = collection(db_instance, 'artifacts', app_id_global, 'chats', targetChatId, 'messages');
             await addDoc(messagesRef, messageData);
             setNewMessage('');
 
-            // Optional: Update the last message field on the parent chat document
-            await updateDoc(doc(db_instance, 'artifacts', app_id_global, 'users', currentUserId, 'chats', targetChatId), {
+            // Update the last message field on the parent chat document for both users
+            const chatRefUser1 = doc(db_instance, 'artifacts', app_id_global, 'users', currentUserId, 'chats', targetChatId);
+            const chatRefUser2 = doc(db_instance, 'artifacts', app_id_global, 'users', targetUser.id, 'chats', targetChatId);
+            
+            const chatData = {
+                recipientId: targetUser.id,
+                name: targetUser.name,
                 lastMessage: newMessage.trim(),
                 timestamp: serverTimestamp(),
-            });
-             await updateDoc(doc(db_instance, 'artifacts', app_id_global, 'users', targetUser.id, 'chats', targetChatId), {
-                lastMessage: newMessage.trim(),
-                timestamp: serverTimestamp(),
-            });
+            };
+
+            await setDoc(chatRefUser1, chatData, { merge: true });
+            await setDoc(chatRefUser2, { ...chatData, recipientId: currentUserId, name: "Yourself" }, { merge: true });
 
         } catch (error) {
             console.error("Error sending message:", error);
@@ -601,7 +600,7 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
     
     const formatTime = (date) => {
         if (!date) return '';
-        const d = date instanceof Date ? date : date;
+        const d = date instanceof Date ? date : new Date(date.seconds * 1000);
         return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     };
 
@@ -633,10 +632,11 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder={`Message ${targetUser.name}...`}
+                    placeholder={isDevMode ? "Message (DEV MODE: MOCKED)" : `Message ${targetUser.name}...`}
                     className="message-input-field"
+                    disabled={isDevMode}
                 />
-                <button type="submit" className="message-send-button" disabled={!newMessage.trim()}>
+                <button type="submit" className="message-send-button" disabled={!newMessage.trim() || isDevMode}>
                     <Send className="icon-small" />
                 </button>
             </form>
@@ -647,7 +647,7 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
 
 // --- Component: Messages View (New) ---
 const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
-    const isDevMode = profile.id === 'local_user_id';
+    const isDevMode = db_instance === null;
     const [conversations, setConversations] = useState(MOCK_CONVERSATIONS);
     
     const selectedChat = targetChatId ? conversations.find(c => c.id === targetChatId) : conversations[0];
@@ -655,8 +655,7 @@ const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
     
     // 1. REAL-TIME CONVERSATIONS LISTENER
     useEffect(() => {
-        if (isDevMode || !db_instance || !profile.id) {
-            // In DEV mode, use fixed mock conversations
+        if (isDevMode) {
             setConversations(MOCK_CONVERSATIONS);
             if (!targetChatId && MOCK_CONVERSATIONS.length > 0) {
                  setTargetChatId(MOCK_CONVERSATIONS[0].id);
@@ -697,7 +696,7 @@ const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
                     <span className="chat-contact-name">{target.name}</span>
                     <p className="chat-last-message">{chat.lastMessage}</p>
                 </div>
-                <span className="chat-last-time">{chat.timestamp ? chat.timestamp.toLocaleDateString([], { month: 'short', day: 'numeric' }) : ''}</span>
+                <span className="chat-last-time">{chat.timestamp ? (chat.timestamp.toDate ? chat.timestamp.toDate().toLocaleDateString([], { month: 'short', day: 'numeric' }) : new Date(chat.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric' })) : ''}</span>
             </div>
         );
     };
@@ -802,11 +801,11 @@ export default function App() {
     const [profile, setProfile] = useState(INITIAL_PROFILE);
     const [userId, setUserId] = useState(INITIAL_PROFILE.id);
     const [allUsers, setAllUsers] = useState([INITIAL_PROFILE]);
-    const [targetChatId, setTargetChatId] = useState(null); // Centrally managed selected chat
+    const [targetChatId, setTargetChatId] = useState(null);
     const [isDevMode, setIsDevMode] = useState(true);
     const [authState, setAuthState] = useState({
         isInitializing: true,
-        error: "DEV MODE: Firebase is inactive. Data is NOT saved.",
+        error: "DEV MODE: Initializing...",
     });
 
     // 1. Initialization and Authentication
@@ -818,7 +817,6 @@ export default function App() {
             const unsubscribe = onAuthStateChanged(auth_instance, async (user) => {
                 if (user) {
                     setUserId(user.uid);
-                    await signInWithCustomToken(auth_instance, user.uid); // Simplified auth for initial read/write
                 } else {
                     await signInAnonymously(auth_instance);
                 }
@@ -836,12 +834,14 @@ export default function App() {
     
     // 2. Profile Data Persistence (Fetch and Save Self Profile)
     useEffect(() => {
-        if (authState.isInitializing || isDevMode) {
-            // Use mock data locally
+        if (authState.isInitializing) return;
+
+        if (isDevMode) {
             setAllUsers([profile, ...MOCK_PROFILES_DATA]);
             return;
         }
 
+        // --- Live Firestore Logic ---
         const profileRef = doc(db_instance, 'artifacts', app_id_global, 'users', userId, 'profile', 'data');
         
         const unsubscribe = onSnapshot(profileRef, (docSnap) => {
@@ -850,6 +850,12 @@ export default function App() {
             } else {
                 setDoc(profileRef, { ...INITIAL_PROFILE, id: userId, lastActive: serverTimestamp() });
                 setProfile({ ...INITIAL_PROFILE, id: userId });
+            }
+        }, (error) => {
+            console.error("Firestore Profile Error:", error);
+            if (error.code === 'permission-denied') {
+                 setAuthState(prev => ({ ...prev, error: "SECURITY ERROR: Check Firebase Rules and Authentication." }));
+                 setIsDevMode(true);
             }
         });
 
@@ -865,7 +871,7 @@ export default function App() {
 
         const q = query(
             collection(db_instance, 'artifacts', app_id_global, 'users'),
-            where('profile.id', '!=', ''), // Simple way to query users
+            where('profile.id', '!=', ''),
             limit(100)
         );
 
@@ -881,7 +887,6 @@ export default function App() {
 
     const saveProfileData = useCallback(async (dataToSave) => {
         if (isDevMode) {
-            console.log("Saving mock data in DEV MODE:", dataToSave);
             setProfile(dataToSave);
             return;
         }
@@ -917,8 +922,6 @@ export default function App() {
     };
 
     const renderView = () => {
-        const targetUser = allUsers.find(u => getChatId(profile.id, u.id) === targetChatId);
-
         switch (currentTab) {
             case TABS.PROFILE:
                 return <ProfileView profile={profile} userId={userId} setProfile={setProfile} isDevMode={isDevMode} saveProfileData={saveProfileData} />;
