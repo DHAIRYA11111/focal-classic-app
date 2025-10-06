@@ -28,11 +28,11 @@ import {
 
 // --- Icon Definitions (Must be defined first) ---
 const User = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
-const Connect = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.74 1.74"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>;
+const Connect = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.74 1.74"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>;
 const Mail = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>;
 const Heart = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3.5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>;
 const Sparkle = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12h2"/><path d="M12 20v2"/><path d="M12 2h0.01"/><path d="m20 20-1.4-1.4"/><path d="m4 4 1.4 1.4"/><path d="M21 15.5H16.5L15 21l-3.5-3.5L8 21l-1.5-5.5H2l3.5-3.5L2 8l5.5-1.5L8 2l3.5 3.5L15 2l1.5 5.5H21l-3.5 3.5L21 15.5z"/></svg>;
-const Settings = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0.73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0.73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+const Settings = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0.73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l-.22.38a2 2 0 0 0 2.73.73l-.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l-.15-.09a2 2 0 0 0.73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
 const Trophy = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M12 15V9"/><path d="M12 20a6 6 0 0 0-6-6v-3a6 6 0 1 0 12 0v3a6 6 0 0 0-6 6z"/></svg>;
 const Search = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
 const Fire = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5a2.5 2.5 0 0 0 0-5C6.5 7 5 3.5 5 3.5c.378 1.5 1.5 3 2.5 4.5 1.5 2.5 4 2.5 4 2.5v12c0.5.25 1.5 1s.5-.5.5-1v-2"/><path d="M16 17c0 1.5-2.5 3-5 3s-5-1.5-5-3c0-.5.25-1.5-1s.5.5.5 1"/></svg>;
@@ -299,8 +299,8 @@ const ProfileView = ({ profile, userId, setProfile, isDevMode, saveProfileData }
         setNarrative("Generating...");
 
         const meritList = Object.entries(profile.meritBreakdown)
-          .map(([key, value]) => `${key}: ${value} points`)
-          .join(', ');
+         .map(([key, value]) => `${key}: ${value} points`)
+         .join(', ');
 
         const systemPrompt = "You are a world-class LinkedIn profile generator. Create a concise, high-impact, single-paragraph bio (3-4 sentences max). Focus on achievements, impact, and future goals.";
         const userQuery = `Generate a professional bio for a student named ${profile.name} in ${profile.year} of ${profile.major}. Their merit breakdown is: ${meritList}. The profile should frame their merit score (${focalScore}) as a ranking of success.`;
@@ -420,7 +420,7 @@ const ConnectView = ({ profile, setProfile, isDevMode, allUsers, setTargetChatId
     
     // Filter by dating status
     const displayedProfiles = profile.isDatingEnabled
-      ? filteredProfiles.filter(user => user.isDatingEnabled)
+     ? filteredProfiles.filter(user => user.isDatingEnabled)
         : filteredProfiles;
 
     return (
@@ -536,8 +536,8 @@ const ProfileCard = ({ user, datingMessage, generateIcebreaker, onChatClick }) =
 // --- Component: Leaderboard View (Skipped for brevity) ---
 const LeaderboardView = ({ isDevMode, allUsers }) => {
     const leaderboardData = [...allUsers]
-      .sort((a, b) => b.focalScore - a.focalScore)
-      .map((p, index) => ({...p, rank: index + 1 }));
+     .sort((a, b) => b.focalScore - a.focalScore)
+     .map((p, index) => ({...p, rank: index + 1 }));
 
     return (
         <div className="view-container leaderboard-view">
@@ -595,7 +595,7 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const msgs = snapshot.docs.map(doc => ({
                 id: doc.id,
-              ...doc.data(),
+             ...doc.data(),
                 timestamp: doc.data().timestamp?.toDate(),
             }));
             setMessages(msgs);
@@ -701,7 +701,7 @@ const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
     
     // Determine the user we are chatting with
     const targetUser = selectedChat
-      ? allUsers.find(u => getChatId(profile.id, u.id) === selectedChat.id && u.id!== profile.id) |
+     ? allUsers.find(u => getChatId(profile.id, u.id) === selectedChat.id && u.id!== profile.id) |
 
 | allUsers.find(u => u.id === selectedChat.recipientId)
         : null;
@@ -1007,10 +1007,10 @@ export default function App() {
                 }
 
                 /* --- App Layout (PC/Desktop Grid) --- */
-              .app-container {
+             .app-container {
                     color: var(--color-white);
                 }
-              .app-container.desktop-grid {
+             .app-container.desktop-grid {
                     display: grid;
                     grid-template-columns: var(--sidebar-width) 1fr;
                     min-height: 100vh;
@@ -1021,7 +1021,7 @@ export default function App() {
                     background-color: var(--color-gray-950); /* Main app background */
                 }
 
-              .sidebar {
+             .sidebar {
                     position: fixed;
                     top: 0;
                     left: 0;
@@ -1035,7 +1035,7 @@ export default function App() {
                     justify-content: space-between;
                 }
 
-              .logo {
+             .logo {
                     font-size: 1.8rem;
                     font-weight: 900;
                     text-align: center;
@@ -1044,12 +1044,12 @@ export default function App() {
                     color: var(--accent-color);
                 }
 
-              .sidebar-group {
+             .sidebar-group {
                     display: flex;
                     flex-direction: column;
                 }
 
-              .sidebar-button {
+             .sidebar-button {
                     display: flex;
                     align-items: center;
                     width: 100%;
@@ -1065,44 +1065,44 @@ export default function App() {
                     color: var(--color-gray-400);
                 }
 
-              .sidebar-button:hover:not(.active) {
+             .sidebar-button:hover:not(.active) {
                     background-color: var(--color-gray-800);
                     color: var(--color-white);
                 }
 
-              .sidebar-button.active {
+             .sidebar-button.active {
                     background-color: var(--color-gray-800);
                     font-weight: 700;
                     color: var(--accent-color);
                     border-right-color: var(--accent-color);
                 }
 
-              .sidebar-footer {
+             .sidebar-footer {
                     padding-top: 20px;
                     border-top: 1px solid var(--color-gray-800);
                 }
 
                 /* --- Main Content Panel --- */
-              .main-content-panel {
+             .main-content-panel {
                     grid-column: 2 / 3;
                     display: flex;
                     flex-direction: column;
                     background-color: var(--color-gray-950);
                 }
 
-              .content-area {
+             .content-area {
                     flex-grow: 1;
                     overflow-y: auto;
                     padding: 0 40px 40px 40px; 
                 }
 
-              .view-container {
+             .view-container {
                     padding-top: 24px;
                     max-width: 1000px; 
                     margin: 0 auto;
                 }
 
-              .card {
+             .card {
                     background-color: var(--color-gray-900);
                     padding: 20px;
                     border-radius: 12px;
@@ -1111,14 +1111,14 @@ export default function App() {
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
                 }
 
-              .card-title {
+             .card-title {
                     font-size: 1.1rem;
                     font-weight: 600;
                     color: var(--color-white);
                     margin-bottom: 12px;
                 }
 
-              .button-primary { 
+             .button-primary { 
                     background-color: var(--accent-color);
                     color: var(--color-black);
                     padding: 10px 20px;
@@ -1131,12 +1131,12 @@ export default function App() {
                     gap: 8px;
                 }
 
-              .button-primary:hover:not(.active) {
+             .button-primary:hover:not(.active) {
                     background-color: transparent;
                     color: var(--accent-color);
                 }
 
-              .button-secondary {
+             .button-secondary {
                     background-color: var(--color-gray-800);
                     color: var(--color-white);
                     padding: 10px 20px;
@@ -1146,7 +1146,7 @@ export default function App() {
                     cursor: pointer;
                 }
 
-              .button-secondary:hover:not(.active) {
+             .button-secondary:hover:not(.active) {
                     background-color: var(--color-gray-700);
                     border-color: var(--color-gray-700);
                 }
@@ -1156,11 +1156,11 @@ export default function App() {
                     cursor: not-allowed;
                 }
 
-              .icon-small { width: 16px; height: 16px; }
-              .icon-medium { width: 24px; height: 24px; }
-              .icon-large { width: 48px; height: 48px; }
+             .icon-small { width: 16px; height: 16px; }
+             .icon-medium { width: 24px; height: 24px; }
+             .icon-large { width: 48px; height: 48px; }
 
-              .dev-mode-banner {
+             .dev-mode-banner {
                     background-color: var(--color-gray-800);
                     color: var(--color-gray-300);
                     font-size: 0.8rem;
@@ -1173,21 +1173,21 @@ export default function App() {
                 }
 
                 /* --- Profile View Specifics (Two-Column Layout) --- */
-              .profile-view {
+             .profile-view {
                     display: grid;
                     grid-template-columns: 1.5fr 1fr; 
                     gap: 40px;
                 }
 
-              .profile-card-section {
+             .profile-card-section {
                     grid-column: 1 / 2;
                 }
 
-              .profile-merit-section {
+             .profile-merit-section {
                     grid-column: 2 / 3;
                 }
 
-              .profile-card-image {
+             .profile-card-image {
                     height: 300px; 
                     border-radius: 12px;
                     background-color: var(--color-gray-800);
@@ -1199,7 +1199,7 @@ export default function App() {
                     margin-bottom: 20px;
                 }
 
-              .profile-card-overlay {
+             .profile-card-overlay {
                     position: absolute;
                     bottom: 0;
                     left: 0;
@@ -1209,21 +1209,21 @@ export default function App() {
                     color: var(--color-white);
                 }
 
-              .profile-name {
+             .profile-name {
                     font-size: 2rem;
                     font-weight: 900;
                     line-height: 1.1;
                     color: var(--color-white);
                 }
 
-              .profile-detail {
+             .profile-detail {
                     font-size: 1rem;
                     color: var(--color-gray-300);
                     margin-top: 4px;
                     margin-bottom: 8px;
                 }
 
-              .profile-metrics {
+             .profile-metrics {
                     display: flex;
                     gap: 16px;
                     font-size: 0.9rem;
@@ -1231,88 +1231,88 @@ export default function App() {
                     color: var(--color-gray-300);
                 }
 
-              .metric-item {
+             .metric-item {
                     display: flex;
                     align-items: center;
                     gap: 4px;
                 }
 
-              .metric-fire { color: var(--color-rose); }
-              .metric-heart { color: var(--color-rose); }
+             .metric-fire { color: var(--color-rose); }
+             .metric-heart { color: var(--color-rose); }
 
-              .profile-bio-details {
+             .profile-bio-details {
                     padding: 16px 20px;
                 }
 
-              .profile-bio-text {
+             .profile-bio-text {
                     font-size: 1rem;
                     line-height: 1.5;
                     color: var(--color-gray-300);
                 }
 
-              .score-card { border-left: 3px solid var(--accent-color); margin-bottom: 24px; }
-              .score-value { font-size: 3.5rem; font-weight: 800; }
-              .merit-details { margin-top: 10px; border-top: 1px dashed var(--color-gray-800); padding-top: 10px; display: grid; gap: 8px; }
-              .merit-item { display: flex; justify-content: space-between; font-size: 0.875rem; }
-              .merit-label { color: var(--color-gray-400); }
-              .merit-points { color: var(--color-gray-300); font-weight: 600; font-family: monospace; }
-              .narrative-card { border-left: 3px solid var(--color-gray-500); }
-              .narrative-text { font-size: 0.95rem; line-height: 1.5; color: var(--color-gray-300); }
-              .narrative-actions { display: flex; gap: 12px; margin-top: 16px; }
-              .redemption-card { border-left: 3px solid var(--color-gray-700); }
-              .redemption-text { font-size: 0.9rem; color: var(--color-gray-400); }
-              .merit-bonus { color: var(--color-white); font-weight: 700; }
-              .connect-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-              .connect-toggle-container { display: flex; align-items: center; gap: 10px; }
-              .connect-toggle-label { font-size: 0.9rem; color: var(--color-gray-400); }
-              .search-bar-container { display: flex; align-items: center; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); border-radius: 8px; padding: 10px 16px; margin-bottom: 24px; }
-              .icon-search { width: 20px; height: 20px; color: var(--color-gray-500); margin-right: 12px; }
-              .search-input { flex-grow: 1; background: none; border: none; color: var(--color-white); font-size: 1rem; outline: none; }
-              .connect-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
-              .user-profile-card { padding: 16px; }
-              .profile-summary { display: flex; align-items: center; border-bottom: 1px solid var(--color-gray-800); padding-bottom: 12px; margin-bottom: 12px; }
-              .profile-summary.icon-medium { color: var(--accent-color); margin-right: 12px; }
-              .profile-text { flex-grow: 1; }
-              .user-name { font-size: 1.125rem; font-weight: 700; color: var(--color-white); }
-              .user-score { font-size: 0.75rem; font-weight: 500; color: var(--color-gray-500); margin-left: 8px; }
-              .user-major { font-size: 0.875rem; color: var(--color-gray-400); }
-              .like-button { background-color: var(--color-gray-800); border: none; color: var(--color-rose); padding: 8px; border-radius: 50%; cursor: pointer; }
-              .like-button:hover { background-color: var(--color-rose); color: var(--color-white); }
-              .profile-details-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
-              .detail-label { font-weight: 600; color: var(--color-gray-300); display: block; margin-bottom: 4px; }
-              .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-              .tag { background-color: var(--color-gray-800); color: var(--color-white); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; }
-              .tag-dislike { background-color: var(--color-gray-950); color: var(--color-gray-500); border: 1px solid var(--color-gray-800); }
-              .icebreaker-section { border-top: 1px solid var(--color-gray-800); padding-top: 12px; }
-              .icebreaker-label { font-size: 0.75rem; color: var(--color-gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-              .icebreaker-box { display: flex; align-items: center; background-color: var(--color-gray-800); padding: 8px; border-radius: 8px; }
-              .icebreaker-text { flex-grow: 1; font-size: 0.9rem; padding-right: 8px; }
-              .placeholder-text { color: var(--color-gray-500); font-style: italic; }
-              .generated-text { color: var(--color-gray-300); font-weight: 500; }
-              .generate-button { background-color: var(--color-gray-950); color: var(--accent-color); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-gray-800); font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; cursor: pointer; }
-              .copy-button { background: none; border: none; color: var(--color-gray-500); padding: 4px; cursor: pointer; }
-              .leaderboard-grid { display: grid; grid-template-columns: 50px 3fr 1fr; border: 1px solid var(--color-gray-800); border-radius: 12px; overflow: hidden; }
-              .leaderboard-header { background-color: var(--color-gray-700); padding: 12px 16px; font-weight: 700; color: var(--color-white); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--color-gray-800); }
-              .leaderboard-header span { display: flex; align-items: center; padding-left: 10px; }
-              .leaderboard-rank-header { justify-content: center; }
-              .leaderboard-score-header { justify-content: flex-end; }
-              .leaderboard-row:nth-child(odd) > span { background-color: var(--color-gray-900); }
-              .leaderboard-row:nth-child(even) > span { background-color: var(--color-gray-950); }
-              .leaderboard-row:hover > span { background-color: var(--color-gray-800); }
-              .leaderboard-row span { padding: 12px 16px; border-top: 1px solid var(--color-gray-800); font-size: 0.95rem; display: flex; align-items: center; }
-              .leaderboard-rank { font-weight: 700; color: var(--accent-color); justify-content: center; }
-              .top-rank.leaderboard-rank { font-size: 1.1rem; background-color: var(--color-gray-700)!important; color: var(--color-white); }
-              .leaderboard-name-major { flex-direction: column; align-items: flex-start; }
-              .leaderboard-name { font-weight: 600; color: var(--color-white); }
-              .leaderboard-major { font-size: 0.8rem; color: var(--color-gray-500); margin-top: 2px; }
-              .leaderboard-score { font-weight: 700; color: var(--color-gray-300); justify-content: flex-end; font-family: monospace; }
-              .settings-view { padding-top: 24px; max-width: 700px; }
-              .settings-section-title { font-size: 1.3rem; font-weight: 700; color: var(--accent-color); margin-top: 24px; margin-bottom: 16px; }
-              .input-field { width: 100%; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); padding: 8px 12px; color: var(--color-white); border-radius: 6px; font-size: 1rem; outline: none; }
-              .input-field-small { width: 80px; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); padding: 6px 10px; color: var(--color-white); border-radius: 6px; font-size: 0.9rem; text-align: right; outline: none; }
+             .score-card { border-left: 3px solid var(--accent-color); margin-bottom: 24px; }
+             .score-value { font-size: 3.5rem; font-weight: 800; }
+             .merit-details { margin-top: 10px; border-top: 1px dashed var(--color-gray-800); padding-top: 10px; display: grid; gap: 8px; }
+             .merit-item { display: flex; justify-content: space-between; font-size: 0.875rem; }
+             .merit-label { color: var(--color-gray-400); }
+             .merit-points { color: var(--color-gray-300); font-weight: 600; font-family: monospace; }
+             .narrative-card { border-left: 3px solid var(--color-gray-500); }
+             .narrative-text { font-size: 0.95rem; line-height: 1.5; color: var(--color-gray-300); }
+             .narrative-actions { display: flex; gap: 12px; margin-top: 16px; }
+             .redemption-card { border-left: 3px solid var(--color-gray-700); }
+             .redemption-text { font-size: 0.9rem; color: var(--color-gray-400); }
+             .merit-bonus { color: var(--color-white); font-weight: 700; }
+             .connect-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+             .connect-toggle-container { display: flex; align-items: center; gap: 10px; }
+             .connect-toggle-label { font-size: 0.9rem; color: var(--color-gray-400); }
+             .search-bar-container { display: flex; align-items: center; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); border-radius: 8px; padding: 10px 16px; margin-bottom: 24px; }
+             .icon-search { width: 20px; height: 20px; color: var(--color-gray-500); margin-right: 12px; }
+             .search-input { flex-grow: 1; background: none; border: none; color: var(--color-white); font-size: 1rem; outline: none; }
+             .connect-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+             .user-profile-card { padding: 16px; }
+             .profile-summary { display: flex; align-items: center; border-bottom: 1px solid var(--color-gray-800); padding-bottom: 12px; margin-bottom: 12px; }
+             .profile-summary.icon-medium { color: var(--accent-color); margin-right: 12px; }
+             .profile-text { flex-grow: 1; }
+             .user-name { font-size: 1.125rem; font-weight: 700; color: var(--color-white); }
+             .user-score { font-size: 0.75rem; font-weight: 500; color: var(--color-gray-500); margin-left: 8px; }
+             .user-major { font-size: 0.875rem; color: var(--color-gray-400); }
+             .like-button { background-color: var(--color-gray-800); border: none; color: var(--color-rose); padding: 8px; border-radius: 50%; cursor: pointer; }
+             .like-button:hover { background-color: var(--color-rose); color: var(--color-white); }
+             .profile-details-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
+             .detail-label { font-weight: 600; color: var(--color-gray-300); display: block; margin-bottom: 4px; }
+             .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+             .tag { background-color: var(--color-gray-800); color: var(--color-white); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; }
+             .tag-dislike { background-color: var(--color-gray-950); color: var(--color-gray-500); border: 1px solid var(--color-gray-800); }
+             .icebreaker-section { border-top: 1px solid var(--color-gray-800); padding-top: 12px; }
+             .icebreaker-label { font-size: 0.75rem; color: var(--color-gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+             .icebreaker-box { display: flex; align-items: center; background-color: var(--color-gray-800); padding: 8px; border-radius: 8px; }
+             .icebreaker-text { flex-grow: 1; font-size: 0.9rem; padding-right: 8px; }
+             .placeholder-text { color: var(--color-gray-500); font-style: italic; }
+             .generated-text { color: var(--color-gray-300); font-weight: 500; }
+             .generate-button { background-color: var(--color-gray-950); color: var(--accent-color); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-gray-800); font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; cursor: pointer; }
+             .copy-button { background: none; border: none; color: var(--color-gray-500); padding: 4px; cursor: pointer; }
+             .leaderboard-grid { display: grid; grid-template-columns: 50px 3fr 1fr; border: 1px solid var(--color-gray-800); border-radius: 12px; overflow: hidden; }
+             .leaderboard-header { background-color: var(--color-gray-700); padding: 12px 16px; font-weight: 700; color: var(--color-white); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--color-gray-800); }
+             .leaderboard-header span { display: flex; align-items: center; padding-left: 10px; }
+             .leaderboard-rank-header { justify-content: center; }
+             .leaderboard-score-header { justify-content: flex-end; }
+             .leaderboard-row:nth-child(odd) > span { background-color: var(--color-gray-900); }
+             .leaderboard-row:nth-child(even) > span { background-color: var(--color-gray-950); }
+             .leaderboard-row:hover > span { background-color: var(--color-gray-800); }
+             .leaderboard-row span { padding: 12px 16px; border-top: 1px solid var(--color-gray-800); font-size: 0.95rem; display: flex; align-items: center; }
+             .leaderboard-rank { font-weight: 700; color: var(--accent-color); justify-content: center; }
+             .top-rank.leaderboard-rank { font-size: 1.1rem; background-color: var(--color-gray-700)!important; color: var(--color-white); }
+             .leaderboard-name-major { flex-direction: column; align-items: flex-start; }
+             .leaderboard-name { font-weight: 600; color: var(--color-white); }
+             .leaderboard-major { font-size: 0.8rem; color: var(--color-gray-500); margin-top: 2px; }
+             .leaderboard-score { font-weight: 700; color: var(--color-gray-300); justify-content: flex-end; font-family: monospace; }
+             .settings-view { padding-top: 24px; max-width: 700px; }
+             .settings-section-title { font-size: 1.3rem; font-weight: 700; color: var(--accent-color); margin-top: 24px; margin-bottom: 16px; }
+             .input-field { width: 100%; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); padding: 8px 12px; color: var(--color-white); border-radius: 6px; font-size: 1rem; outline: none; }
+             .input-field-small { width: 80px; background-color: var(--color-gray-800); border: 1px solid var(--color-gray-700); padding: 6px 10px; color: var(--color-white); border-radius: 6px; font-size: 0.9rem; text-align: right; outline: none; }
                 
                 /* --- MESSAGING CSS (FINAL STYLED) --- */
-              .messages-view-grid {
+             .messages-view-grid {
                     display: grid;
                     grid-template-columns: 280px 1fr;
                     min-height: calc(100vh - 70px);
@@ -1325,28 +1325,28 @@ export default function App() {
                     border: 1px solid var(--color-gray-800);
                 }
 
-              .chat-list-panel {
+             .chat-list-panel {
                     grid-column: 1 / 2;
                     background-color: var(--color-gray-900);
                     padding: 16px 0;
                     overflow-y: auto;
                 }
                 
-              .chat-window-panel {
+             .chat-window-panel {
                     grid-column: 2 / 3;
                     background-color: var(--color-gray-950);
                     display: flex;
                     flex-direction: column;
                 }
 
-              .chat-window-container {
+             .chat-window-container {
                     display: flex;
                     flex-direction: column;
                     height: 100%;
                 }
                 
                 /* Conversation Item */
-              .conversation-item {
+             .conversation-item {
                     display: flex;
                     align-items: center;
                     padding: 12px 16px;
@@ -1354,39 +1354,39 @@ export default function App() {
                     border-left: 3px solid transparent;
                 }
                 
-              .conversation-item:hover { background-color: var(--color-gray-800); }
+             .conversation-item:hover { background-color: var(--color-gray-800); }
                 
-              .conversation-item.active {
+             .conversation-item.active {
                     background-color: var(--color-gray-800);
                     border-left-color: var(--accent-color);
                 }
                 
-              .chat-contact-name { font-weight: 600; font-size: 0.95rem; color: var(--color-white); display: block; }
-              .chat-last-message { font-size: 0.8rem; color: var(--color-gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-              .chat-last-time { font-size: 0.7rem; color: var(--color-gray-500); }
+             .chat-contact-name { font-weight: 600; font-size: 0.95rem; color: var(--color-white); display: block; }
+             .chat-last-message { font-size: 0.8rem; color: var(--color-gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+             .chat-last-time { font-size: 0.7rem; color: var(--color-gray-500); }
 
                 /* Chat Window Header */
-              .chat-header-bar {
+             .chat-header-bar {
                     display: flex; align-items: center;
                     padding: 16px;
                     border-bottom: 1px solid var(--color-gray-800);
                     background-color: var(--color-gray-900);
                 }
                 
-              .chat-name { font-size: 1.1rem; font-weight: 700; margin-right: 10px; }
-              .chat-status { font-size: 0.75rem; color: var(--color-rose); border: 1px solid var(--color-rose); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+             .chat-name { font-size: 1.1rem; font-weight: 700; margin-right: 10px; }
+             .chat-status { font-size: 0.75rem; color: var(--color-rose); border: 1px solid var(--color-rose); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
 
                 /* Message List */
-              .message-list {
+             .message-list {
                     flex-grow: 1; overflow-y: auto;
                     padding: 20px;
                     display: flex; flex-direction: column; gap: 12px;
                 }
                 
-              .message-row { display: flex; width: 100%; }
-              .message-row.mine { justify-content: flex-end; }
+             .message-row { display: flex; width: 100%; }
+             .message-row.mine { justify-content: flex-end; }
                 
-              .message-bubble {
+             .message-bubble {
                     max-width: 70%;
                     padding: 10px 14px;
                     border-radius: 18px;
@@ -1394,38 +1394,38 @@ export default function App() {
                     position: relative;
                 }
                 
-              .message-row.mine.message-bubble {
+             .message-row.mine.message-bubble {
                     background-color: var(--accent-color);
                     color: var(--color-black); /* High contrast text on accent color */
                     border-bottom-right-radius: 4px;
                     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
                 }
                 
-              .message-row.theirs.message-bubble {
+             .message-row.theirs.message-bubble {
                     background-color: var(--color-gray-700);
                     color: var(--color-white); /* High contrast text on dark gray */
                     border-bottom-left-radius: 4px;
                 }
 
-              .message-text { margin-bottom: 4px; }
+             .message-text { margin-bottom: 4px; }
 
-              .message-time {
+             .message-time {
                     display: block; font-size: 0.65rem; text-align: right;
                     color: rgba(0, 0, 0, 0.6); /* Darkened for contrast on accent bubble */
                 }
 
-              .message-row.theirs.message-time {
+             .message-row.theirs.message-time {
                     color: var(--color-gray-400); /* Lighter for contrast on dark bubble */
                 }
 
                 /* Message Input */
-              .message-input-area {
+             .message-input-area {
                     padding: 15px 20px; border-top: 1px solid var(--color-gray-800);
                     display: flex; gap: 10px;
                     background-color: var(--color-gray-900);
                 }
                 
-              .message-input-field {
+             .message-input-field {
                     flex-grow: 1; padding: 10px 15px;
                     background-color: var(--color-gray-800);
                     border: 1px solid var(--color-gray-700);
@@ -1433,7 +1433,7 @@ export default function App() {
                     color: var(--color-white); font-size: 1rem; outline: none;
                 }
                 
-              .message-send-button {
+             .message-send-button {
                     background-color: var(--accent-color);
                     color: var(--color-black); border: none;
                     border-radius: 50%; width: 40px; height: 40px;
