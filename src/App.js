@@ -72,7 +72,6 @@ const INITIAL_PROFILE = {
 };
 
 // --- LIVE FIREBASE CONFIGURATION (Using User's Provided Keys) ---
-// Note: This object contains the actual keys needed for deployment.
 const LIVE_FIREBASE_CONFIG = {
     apiKey: "AIzaSyAcr22sc3lgDlgdkZSI06PD_3D7JYVPy8w",
     authDomain: "focal-campus-app.firebaseapp.com",
@@ -81,7 +80,6 @@ const LIVE_FIREBASE_CONFIG = {
     messagingSenderId: "197907061415",
     appId: "1:197907061415:web:00571158ff191402e71982"
 };
-
 
 // Mock data used only if Firebase fails (for development fallback)
 const MOCK_PROFILES_DATA = [
@@ -529,6 +527,7 @@ const LeaderboardView = ({ isDevMode, allUsers }) => {
 // --- Component: Chat Window ---
 const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
     const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = React.useRef(null);
 
     const scrollToBottom = () => {
@@ -644,14 +643,18 @@ const ChatWindow = ({ targetChatId, currentUserId, targetUser, isDevMode }) => {
     );
 };
 
-
 // --- Component: Messages View (New) ---
 const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
     const isDevMode = db_instance === null;
     const [conversations, setConversations] = useState(MOCK_CONVERSATIONS);
     
     const selectedChat = targetChatId ? conversations.find(c => c.id === targetChatId) : conversations[0];
-    const targetUser = selectedChat ? allUsers.find(u => u.id === selectedChat.recipientId) : null;
+    
+    // Determine the user we are chatting with
+    const targetUser = selectedChat
+        ? allUsers.find(u => getChatId(profile.id, u.id) === selectedChat.id && u.id !== profile.id) || allUsers.find(u => u.id === selectedChat.recipientId)
+        : null;
+
     
     // 1. REAL-TIME CONVERSATIONS LISTENER
     useEffect(() => {
@@ -663,6 +666,7 @@ const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
             return;
         }
 
+        // Fetch chats specific to the current user
         const q = query(
             collection(db_instance, 'artifacts', app_id_global, 'users', profile.id, 'chats'),
             orderBy('timestamp', 'desc'),
@@ -682,6 +686,7 @@ const MessagesView = ({ profile, allUsers, setTargetChatId, targetChatId }) => {
     }, [isDevMode, profile.id, targetChatId]);
 
     const ConversationItem = ({ chat }) => {
+        // Find the user object corresponding to the recipient of the chat
         const target = allUsers.find(u => u.id === chat.recipientId) || { name: 'Unknown User' };
         
         return (
@@ -800,7 +805,7 @@ export default function App() {
     const [currentTab, setCurrentTab] = useState(TABS.PROFILE);
     const [profile, setProfile] = useState(INITIAL_PROFILE);
     const [userId, setUserId] = useState(INITIAL_PROFILE.id);
-    const [allUsers, setAllUsers] = useState([INITIAL_PROFILE]);
+    const [allUsers, setAllUsers] = useState(MOCK_PROFILES_DATA); // Use mock data initially
     const [targetChatId, setTargetChatId] = useState(null);
     const [isDevMode, setIsDevMode] = useState(true);
     const [authState, setAuthState] = useState({
@@ -813,7 +818,6 @@ export default function App() {
         initFirebase();
         
         if (auth_instance) {
-            // Live/Canvas Auth setup
             const unsubscribe = onAuthStateChanged(auth_instance, async (user) => {
                 if (user) {
                     setUserId(user.uid);
@@ -825,8 +829,8 @@ export default function App() {
             });
             return () => unsubscribe();
         } else {
-            // Local Dev Mode
-            setUserId(INITIAL_PROFILE.id);
+            // Local Dev Mode (Offline Simulation)
+            setUserId(crypto.randomUUID());
             setAuthState({ isInitializing: false, error: "DEV MODE: Firebase is inactive. Data is NOT saved." });
             setIsDevMode(true);
         }
@@ -848,6 +852,7 @@ export default function App() {
             if (docSnap.exists()) {
                 setProfile(docSnap.data());
             } else {
+                // If profile doesn't exist, create it (happens on first login)
                 setDoc(profileRef, { ...INITIAL_PROFILE, id: userId, lastActive: serverTimestamp() });
                 setProfile({ ...INITIAL_PROFILE, id: userId });
             }
@@ -871,13 +876,12 @@ export default function App() {
 
         const q = query(
             collection(db_instance, 'artifacts', app_id_global, 'users'),
-            where('profile.id', '!=', ''),
+            where('id', '!=', ''),
             limit(100)
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const fetchedUsers = snapshot.docs.map(doc => doc.data());
-            // Store all user profiles for filtering (including self)
             setAllUsers(fetchedUsers.map(u => u.profile).filter(p => p.id));
         });
 
